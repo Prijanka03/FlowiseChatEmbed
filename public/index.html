@@ -1,37 +1,170 @@
-<!--
-  NOTE: This .html file (and public folder) is optional and can be safely deleted.
-  It serves only as a demo/test page.
-  
-  The chatbot can be embedded directly on any allowed domain using the embed script that
-  is generated when starting the server.
--->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flowise Chatbot Widget</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flowise Chatbot Widget</title>
+  <!-- Link to the external CSS file -->
+  <link rel="stylesheet" href="app.css">
 </head>
 
 <body>
-    <div id="root"></div>
-    <script type="module">
-        import Chatbot from './web.js'
-        
-        // Example initialization:
-        // If your .env contains:
-        // agent1=xyz789-uvw456,https://example.com
-        // support=abc123-def456,https://example.com
-        // salesbot=ghi123-jkl456,https://example.com
-        //
-        // Then use the environment variable name as chatflowid:
-        Chatbot.init({
-            chatflowid: 'agent1',    // or 'support', 'salesbot', etc.
-            apiHost: window.location.origin
-        })
-    </script>
+  <div class="app-container">
+    <!-- Left Panel: Document Storage -->
+    <div class="left-panel">
+      <h2>Document Storage</h2>
+      <div class="file-upload-container">
+        <label for="fileUpload" class="file-upload-label">Choose File</label>
+        <input type="file" id="fileUpload" style="display: none;">
+        <div class="file-upload-actions">
+          <button id="uploadButton">Upload</button>
+          <button id="replaceButton">Replace</button>
+        </div>
+        <div class="file-selected" id="fileSelected"></div>
+      </div>
+      <ul>
+        <li>Document 1</li>
+        <li>Document 2</li>
+        <li>Document 3</li>
+      </ul>
+    </div>
+
+    <!-- Center Panel: Chatbot -->
+    <div class="center-panel">
+      <flowise-fullchatbot id="flowise-fullchatbot"></flowise-fullchatbot>
+    </div>
+
+    <!-- Right Panel: Chat History -->
+    <div class="right-panel">
+      <h2>Chat History</h2>
+      <ul>
+        <li>Session 1</li>
+        <li>Session 2</li>
+        <li>Session 3</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Embed Flowise Chatbot -->
+  <script type="module">
+    import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js";
+
+    Chatbot.initFull({
+      chatflowid: "11b8b285-fe19-444c-8e88-4f487ec99680",
+      apiHost: "http://localhost:3000",
+      chatflowConfig: {
+        // Additional chatflow configurations if required
+      },
+      observersConfig: {
+        // Additional observers configurations if required
+      },
+      theme: {
+        button: {
+          backgroundColor: '#3b816',
+          right: 20,
+          bottom: 20,
+          size: 48,
+          dragAndDrop: true,
+          iconColor: 'white',
+          autoWindowOpen: {
+            autoOpen: true,
+            openDelay: 2,
+            autoOpenOnMobile: false,
+          },
+        },
+        tooltip: {
+          showTooltip: true,
+          tooltipMessage: 'Hi There 👋!',
+          tooltipBackgroundColor: 'black',
+          tooltipTextColor: 'white',
+          tooltipFontSize: 16,
+        },
+        disclaimer: {
+          title: 'Disclaimer',
+          message:
+            'By using this chatbot, you agree to the <a target="_blank" href="https://flowiseai.com/terms">Terms & Condition</a>',
+          textColor: 'black',
+          buttonColor: '#3b82f6',
+          buttonText: 'Start Chatting',
+          buttonTextColor: 'white',
+          blurredBackgroundColor: 'rgba(0, 0, 0, 0.4)',
+          backgroundColor: 'white',
+        },
+        customCSS: ``,
+        chatWindow: {
+          showTitle: true,
+          showAgentMessages: true,
+          title: '',
+          welcomeMessage: 'Hello! How can I assist you today?',
+          errorMessage: 'This is a custom error message',
+          backgroundColor: '#343541',
+          backgroundImage: 'enter image path or link',
+          height: '500px',
+          width: '500px',
+          fontSize: 18,
+          starterPrompts: [
+            'I want to ask a question about a document.',
+            'Is this document in the system?',
+          ],
+          starterPromptFontSize: 15,
+          clearChatOnReload: false,
+          sourceDocsTitle: 'Sources:',
+          renderHTML: true,
+          botMessage: {
+            backgroundColor: '#f7f8ff',
+            textColor: '#303235',
+            showAvatar: false,
+            avatarSrc:
+              'https://raw.githubusercontent.com/zahidkhawaja/langchain-chat-nextjs/main/public/parroticon.png',
+          },
+          userMessage: {
+            backgroundColor: '#40414f',
+            textColor: '#ffffff',
+            showAvatar: false,
+            avatarSrc:
+              'https://raw.githubusercontent.com/zahidkhawaja/langchain-chat-nextjs/main/public/usericon.png',
+          },
+          textInput: {
+             position: 'absolute',
+             bottom: '0',
+             width: '100%',
+            placeholder: 'Type your question',
+            backgroundColor: '#40414f',
+            textColor: '#ffffff',
+            sendButtonColor: '#ffffff',
+            maxChars: 100,
+            maxCharsWarningMessage:
+              'You exceeded the characters limit. Please input less than 100 characters.',
+            autoFocus: true,
+            sendMessageSound: true,
+            sendSoundLocation: 'send_message.mp3',
+            receiveMessageSound: true,
+            receiveSoundLocation: 'receive_message.mp3',
+          },
+          feedback: {
+            color: '#303235'
+          },
+          dateTimeToggle: {
+            date: true,
+            time: true,
+          },
+          
+        },
+      },
+    });
+
+    // File upload functionality
+    const fileUpload = document.getElementById('fileUpload');
+    const fileSelected = document.getElementById('fileSelected');
+
+    fileUpload.addEventListener('change', () => {
+      const fileName = fileUpload.files[0]?.name || 'No file selected';
+      fileSelected.textContent = `Selected file: ${fileName}`;
+
+      
+    });
+  </script>
 </body>
 
 </html>

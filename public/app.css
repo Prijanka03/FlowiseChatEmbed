@@ -1,0 +1,180 @@
+
+/* Reset for consistent styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #343541;
+    color: #d1d5db;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  /* Main container */
+  .app-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+  }
+  
+  /* Left Panel: Document Storage */
+  .left-panel {
+    flex: 0.7;
+    background-color: #40414f;
+    padding: 20px;
+    overflow-y: auto;
+    border-right: 1px solid #525360;
+  }
+  
+  .left-panel h2 {
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  
+  .left-panel ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .left-panel li {
+    padding: 10px;
+    background-color: #525360;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .left-panel li:hover {
+    background-color: #6b6e7e;
+  }
+  
+/* Center Panel: Chatbot */
+.center-panel {
+  flex: 2.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #343541;
+  padding: 20px;
+  height: 100%; /* Ensure the center panel takes up the full height */
+  width: 100%; /* Ensure the center panel takes full width */
+}
+
+.center-panel .flowise-chatbot {
+  width: 100%;  /* Adjust width as needed */
+  height: 80%; /* Adjust height as needed */
+  max-width: 1200px; /* Set the maximum width */
+  max-height: 800px; /* Set the maximum height */
+  min-width: 400px; /* Set the minimum width */
+  min-height: 400px; /* Set the minimum height */
+  overflow: auto; /* Allow scrolling if the content overflows */
+  border-radius: 8px; /* Optional: Add some border-radius for a rounded corner look */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow effect */
+}
+/* Target the Flowise chatbot container */
+#flowise-fullchatbot {
+  width: 100% !important;  /* Set fixed width */
+  height: 100% !important; /* Set fixed height */
+  max-width: 100% !important;  /* Prevent expanding beyond the viewport */
+  max-height: 100% !important; /* Prevent expanding beyond the viewport */
+  /*overflow: auto !important; /* Allow scrolling when content overflows */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Maak de berichten-container scrollbaar en plaats nieuwe berichten onderaan */
+#flowise-fullchatbot .messages-container {
+  flex: 1; /* Laat het de meeste ruimte innemen */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column; /* Laat berichten van onder naar boven verschijnen */
+  padding: 10px;
+}
+
+/* Chatinvoer vastzetten */
+#flowise-fullchatbot .text-input-container {
+  background-color: #40414f; /* Invoerveld achtergrondkleur */
+  padding: 10px;
+  position: sticky; /* Blijf onderaan zichtbaar */
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid #525360; /* Lijn tussen berichten en invoer */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+  /* Right Panel: Chat History */
+  .right-panel {
+    flex: 0.7;
+    background-color: #40414f;
+    padding: 20px;
+    overflow-y: auto;
+    border-left: 1px solid #525360;
+  }
+  
+  .right-panel h2 {
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  
+  .right-panel ul {
+    list-style: none; 
+    padding: 0;
+  }
+  
+  .right-panel li {
+    padding: 10px;
+    background-color: #525360;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .right-panel li:hover {
+    background-color: #6b6e7e;
+  }
+  .file-upload-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .file-upload-label {
+    cursor: pointer;
+    display: inline-block;
+    background-color: #BC8F8F;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+  }
+  
+  .file-upload-actions {
+    margin-top: 10px;
+  }
+  
+  button {
+    background-color: #BC8F8F;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  button:hover {
+    background-color: #9e6f6f;
+  }
+  
+  .file-selected {
+    margin-top: 10px;
+    color: #d1d5db;
+  }
+  
+  
