@@ -1,37 +1,134 @@
-<!--
-  NOTE: This .html file (and public folder) is optional and can be safely deleted.
-  It serves only as a demo/test page.
-  
-  The chatbot can be embedded directly on any allowed domain using the embed script that
-  is generated when starting the server.
--->
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flowise Chatbot Widget</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flowise Chatbot Widget</title>
+  <link rel="stylesheet" href="app.css">
 </head>
-
 <body>
-    <div id="root"></div>
-    <script type="module">
-        import Chatbot from './web.js'
+  <div class="app-container">
+    <!-- Left Panel: Document Storage -->
+    <div class="left-panel">
+      <h2>Document Storage</h2>
+      <div class="file-upload-container">
         
-        // Example initialization:
-        // If your .env contains:
-        // agent1=xyz789-uvw456,https://example.com
-        // support=abc123-def456,https://example.com
-        // salesbot=ghi123-jkl456,https://example.com
-        //
-        // Then use the environment variable name as chatflowid:
-        Chatbot.init({
-            chatflowid: 'agent1',    // or 'support', 'salesbot', etc.
-            apiHost: window.location.origin
-        })
-    </script>
-</body>
+        <label for="fileUpload" class="file-upload-label">Choose File</label>
+        <input type="file" id="fileUpload" style="display: none;" onchange="updateFileName()">
+        <div class="file-upload-actions">
+          <button id="uploadButton">Upload</button>
+        </div>
+        <div class="file-selected" id="fileSelected"></div>
+      </div>
+      
+      <h3> Files in the Document Store</h3> 
 
+      <ul id="fileNamesList"></ul> <!-- Lijst om de bestandsnamen weer te geven -->
+      <script src="FileNames.js"></script> <!-- Je script voor het dynamisch toevoegen van bestandsnamen -->
+    </div>
+
+    <!-- Center Panel: Chatbot -->
+    <div class="center-panel">
+      <flowise-fullchatbot id="flowise-fullchatbot"></flowise-fullchatbot>
+    </div>
+  </div>
+
+  <!-- Embed Flowise Chatbot -->
+  <script type="module">
+    import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js";
+
+    Chatbot.initFull({
+      chatflowid: "16313e17-c099-4000-bbdf-b85885273795",
+      apiHost: "http://localhost:3000",
+      chatflowConfig: {},
+      observersConfig: {},
+      theme: {
+        button: {
+          backgroundColor: '#3b816',
+          right: 20,
+          bottom: 20,
+          size: 48,
+          dragAndDrop: true,
+          iconColor: 'white',
+          autoWindowOpen: {
+            autoOpen: true,
+            openDelay: 2,
+            autoOpenOnMobile: false,
+          },
+        },
+        tooltip: {
+          showTooltip: true,
+          tooltipMessage: 'Hi There 👋!',
+          tooltipBackgroundColor: 'black',
+          tooltipTextColor: 'white',
+          tooltipFontSize: 16,
+        },
+        disclaimer: {
+          title: 'Disclaimer',
+          message:
+            'By using this chatbot, you agree to the <a target="_blank" href="https://flowiseai.com/terms">Terms & Condition</a>',
+          textColor: 'black',
+          buttonColor: '#3b82f6',
+          buttonText: 'Start Chatting',
+          buttonTextColor: 'white',
+          blurredBackgroundColor: 'rgba(0, 0, 0, 0.4)',
+          backgroundColor: 'white',
+        },
+        customCSS: ``,
+        chatWindow: {
+          showTitle: true,
+          showAgentMessages: true,
+          title: '',
+          welcomeMessage: 'Hello! How can I assist you today?',
+          errorMessage: 'This is a custom error message',
+          backgroundColor: '#343541',
+          height: '500px',
+          width: '500px',
+          fontSize: 18,
+          starterPromptFontSize: 15,
+          clearChatOnReload: false,
+          sourceDocsTitle: 'Sources:',
+          renderHTML: true,
+          botMessage: {
+            backgroundColor: '#f7f8ff',
+            textColor: '#303235',
+            showAvatar: false,
+            avatarSrc: 'https://raw.githubusercontent.com/zahidkhawaja/langchain-chat-nextjs/main/public/parroticon.png',
+          },
+          userMessage: {
+            backgroundColor: '#40414f',
+            textColor: '#ffffff',
+            showAvatar: false,
+            avatarSrc: 'https://raw.githubusercontent.com/zahidkhawaja/langchain-chat-nextjs/main/public/usericon.png',
+          },
+          textInput: {
+            bottom: '0',
+            width: '100%',
+            placeholder: 'Type your question',
+            backgroundColor: '#40414f',
+            textColor: '#ffffff',
+            sendButtonColor: '#ffffff',
+            maxChars: 1000,
+            maxCharsWarningMessage: 'You exceeded the characters limit. Please input less than 100 characters.',
+            autoFocus: true,
+            sendMessageSound: false,
+            receiveMessageSound: false,
+          },
+          feedback: {
+            color: '#d1d5db'
+          },
+          dateTimeToggle: {
+            date: true,
+            time: true,
+          },
+        },
+      },
+    });
+
+    
+  </script>
+
+  <!-- Voeg hier de externe JavaScript toe -->
+  <script src="FIleUpload.js"></script>
+</body>
 </html>
