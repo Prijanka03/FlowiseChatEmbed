@@ -49,39 +49,39 @@ export type LeadCaptureRequest = BaseRequest & {
 };
 export declare const sendFeedbackQuery: ({ chatflowid, apiHost, body, onRequest }: CreateFeedbackRequest) => Promise<{
     data?: unknown;
-    error?: Error;
+    error?: Error | undefined;
 }>;
 export declare const updateFeedbackQuery: ({ id, apiHost, body, onRequest }: UpdateFeedbackRequest) => Promise<{
     data?: unknown;
-    error?: Error;
+    error?: Error | undefined;
 }>;
 export declare const sendMessageQuery: ({ chatflowid, apiHost, body, onRequest }: MessageRequest) => Promise<{
     data?: any;
-    error?: Error;
+    error?: Error | undefined;
 }>;
 export declare const createAttachmentWithFormData: ({ chatflowid, apiHost, formData, onRequest }: UpsertRequest) => Promise<{
     data?: unknown;
-    error?: Error;
+    error?: Error | undefined;
 }>;
 export declare const upsertVectorStoreWithFormData: ({ chatflowid, apiHost, formData, onRequest }: UpsertRequest) => Promise<{
     data?: unknown;
-    error?: Error;
+    error?: Error | undefined;
 }>;
 export declare const getChatbotConfig: ({ chatflowid, apiHost, onRequest }: MessageRequest) => Promise<{
     data?: any;
-    error?: Error;
+    error?: Error | undefined;
 }>;
 export declare const isStreamAvailableQuery: ({ chatflowid, apiHost, onRequest }: MessageRequest) => Promise<{
     data?: any;
-    error?: Error;
+    error?: Error | undefined;
 }>;
 export declare const sendFileDownloadQuery: ({ apiHost, body, onRequest }: MessageRequest) => Promise<{
     data?: any;
-    error?: Error;
+    error?: Error | undefined;
 }>;
 export declare const addLeadQuery: ({ apiHost, body, onRequest }: LeadCaptureRequest) => Promise<{
     data?: any;
-    error?: Error;
+    error?: Error | undefined;
 }>;
 export {};
 //# sourceMappingURL=sendMessageQuery.d.ts.map
